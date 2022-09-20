@@ -1,0 +1,23 @@
+apiVersion: apps/v1 # 指定api版本，此值必須在kubectl api-versions中 
+kind: Deployment # 指定創建資源的角色/類型
+metadata: #資料的數據/屬性
+  name: onos-deployment
+  labels:
+    app: onos
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: onos
+  template:
+    metadata:
+      labels:
+        app: onos
+    spec:
+      containers:
+      - name: onos-controller
+        image: onosproject/onos:2.7-latest
+        ports:
+        - containerPort: 8181
+        - containerPort: 6653
+        - containerPort: 8101
